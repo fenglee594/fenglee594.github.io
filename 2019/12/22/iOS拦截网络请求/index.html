@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="WKWebview,网络编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言最近手上有个需求,需要在一条网络请求上加上两个参数,按道理说直接在URL后面加上&amp;amp;xx=xxx就行了,但是因为各种原因,我只能把所有的网络请求拦截下来,然后找到我想要的那条请求,重新处理完之后再去请求.">
+<meta name="keywords" content="WKWebview,网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS拦截(包括但不限于)WKWebView的Http、Https网络请求">
+<meta property="og:url" content="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/index.html">
+<meta property="og:site_name" content="Feng&#39;s Blog">
+<meta property="og:description" content="前言最近手上有个需求,需要在一条网络请求上加上两个参数,按道理说直接在URL后面加上&amp;amp;xx=xxx就行了,但是因为各种原因,我只能把所有的网络请求拦截下来,然后找到我想要的那条请求,重新处理完之后再去请求.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/2257417.jpg">
+<meta property="og:image" content="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/1576990382190.jpg">
+<meta property="og:image" content="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/hookRequest.gif">
+<meta property="og:updated_time" content="2019-12-22T05:06:07.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS拦截(包括但不限于)WKWebView的Http、Https网络请求">
+<meta name="twitter:description" content="前言最近手上有个需求,需要在一条网络请求上加上两个参数,按道理说直接在URL后面加上&amp;amp;xx=xxx就行了,但是因为各种原因,我只能把所有的网络请求拦截下来,然后找到我想要的那条请求,重新处理完之后再去请求.">
+<meta name="twitter:image" content="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/2257417.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/"/>
+
+
+
+
+
+  <title>iOS拦截(包括但不限于)WKWebView的Http、Https网络请求 | Feng's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Feng's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">nishizhendeniupi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.fenglee.ink/2019/12/22/iOS拦截网络请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Feng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Feng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS拦截(包括但不限于)WKWebView的Http、Https网络请求</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-22T13:06:07+08:00">
+                2019-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/22/iOS拦截网络请求/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/12/22/iOS拦截网络请求/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近手上有个需求,需要在一条网络请求上加上两个参数,按道理说直接在URL后面加上&amp;xx=xxx就行了,但是因为各种原因,我只能把所有的网络请求拦截下来,然后找到我想要的那条请求,重新处理完之后再去请求.<br><a id="more"></a></p>
+<h4 id="了解NSURLProtocol"><a href="#了解NSURLProtocol" class="headerlink" title="了解NSURLProtocol"></a>了解NSURLProtocol</h4><p>通过网上找资料发现我的需求可以通过NSURLProtocol来实现,而我们的请求基本都是通过一个叫做<a href="https://developer.apple.com/documentation/foundation/url_loading_system?language=objc" target="_blank" rel="noopener">URL Loading System</a>的东西来实现的,socket通信除外.来看一下URL Loading System的关系图<br><img src="2257417.jpg" alt="URL Loading System"></p>
+<p>可以看到URL Loading System包含了网络请求类、网络验证类、URLSession初始化管理、以及我们需要的NSURLProtocol.<br>NSURLProtocol是一个处理URL数据加载的特殊协议类(抽象类),我们不能直接用它去实例化一个对象,而是要继承他去创建一个子类,并且在合适的时机去注册它,利用它我们可以重新自定义URL加载系统,具体来说利用它我们可以做的事情包括但不限于以下几种</p>
+<ul>
+<li>修改请求头</li>
+<li>修改请求的URL(加参数、重定向)</li>
+<li>解决一些DNS被劫持的问题(使用ip直接访问)</li>
+<li>拦截网络请求,做一些埋点</li>
+<li>按我们自己的意愿缓存资源</li>
+</ul>
+<h4 id="Demo内容"><a href="#Demo内容" class="headerlink" title="Demo内容"></a>Demo内容</h4><p>我打算写一个简单demo,在主页面上有一个控制是否拦截请求的开关,没有打开的时候,点击百度和网易的按钮都是正常访问相应的网址,打开之后点击跳转百度会重定向到腾讯新闻,点击网易会重定向到新浪新闻,具体代码看Demo</p>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><pre><code>1、创建继承NSURLProtocol的子类CustomURLProtocol.
+2、重写NSURLProtocol的方法,拦截并转发修改后的请求.
+3、注册CustomURLProtocol.
+</code></pre><h5 id="创建CustomURLProtocol必须实现的几个方法"><a href="#创建CustomURLProtocol必须实现的几个方法" class="headerlink" title="创建CustomURLProtocol必须实现的几个方法"></a>创建CustomURLProtocol必须实现的几个方法</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)canInitWithRequest:(<span class="built_in">NSURLRequest</span> *)request;</span><br><span class="line">+ (<span class="built_in">NSURLRequest</span> *)canonicalRequestForRequest:(<span class="built_in">NSURLRequest</span> *)request;</span><br><span class="line">+ (<span class="built_in">BOOL</span>)requestIsCacheEquivalent:(<span class="built_in">NSURLRequest</span> *)a toRequest:(<span class="built_in">NSURLRequest</span> *)b;</span><br><span class="line">- (<span class="keyword">void</span>)startLoading;</span><br><span class="line">- (<span class="keyword">void</span>)stopLoading;</span><br></pre></td></tr></table></figure>
+<p>1、重写方法canInitWithRequest:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 判断是不是需要hook请求,return yes就hook,然后处理转发,no就放行,不用我们进行处理.</span></span><br><span class="line"><span class="comment"> 这里有个需要注意的地方,正常流程是我们hook了这个请求,然后在startLoading中完成我们需要的操作,再通过URLSession转发出去这个时候我们需要给请求加一个属性来判断是否已经进行了处理,不然的话,流程就会变成拦截--&gt;处理--&gt;转发--&gt;拦截,陷入死循环.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)canInitWithRequest:(<span class="built_in">NSURLRequest</span> *)request</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//    NSLog(@"%s: %@",__func__, request.URL.absoluteString);</span></span><br><span class="line">    <span class="built_in">NSString</span> *scheme = [[request URL] scheme];</span><br><span class="line">    <span class="keyword">if</span> ([scheme caseInsensitiveCompare: <span class="string">@"http"</span>] == <span class="built_in">NSOrderedSame</span> || [scheme caseInsensitiveCompare:<span class="string">@"https"</span>] == <span class="built_in">NSOrderedSame</span>) &#123;</span><br><span class="line">        <span class="comment">//o判断是否已经处理过</span></span><br><span class="line">        <span class="keyword">if</span> ([<span class="built_in">NSURLProtocol</span> propertyForKey:kURLProtocolHandledKey inRequest:request]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、重写方法canonicalRequestForRequest<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ (<span class="built_in">NSURLRequest</span> *) canonicalRequestForRequest:(<span class="built_in">NSURLRequest</span> *)request &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSMutableURLRequest</span> *mutableReqeust = [request mutableCopy];</span><br><span class="line">    <span class="comment">// 可以在这里添加request的header,如果不做操作直接return request也可以</span></span><br><span class="line">    <span class="keyword">return</span> mutableReqeust;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、重写方法requestIsCacheEquivalent:toRequest:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ (<span class="built_in">BOOL</span>)requestIsCacheEquivalent:(<span class="built_in">NSURLRequest</span> *)a toRequest:(<span class="built_in">NSURLRequest</span> *)b</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//啥都不做直接扔给系统</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> requestIsCacheEquivalent:a toRequest:b];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、重新方法startLoading:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)startLoading</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//    NSLog(@"%s: %@",__func__, self.request.URL.absoluteString);</span></span><br><span class="line">    <span class="built_in">NSMutableURLRequest</span> *request = [[<span class="keyword">self</span> request] mutableCopy];</span><br><span class="line">    <span class="comment">// 标示改request已经处理过了，防止无限循环</span></span><br><span class="line">    [<span class="built_in">NSURLProtocol</span> setProperty:@(<span class="literal">YES</span>) forKey:HookPropertyKey inRequest:request];</span><br><span class="line">    <span class="keyword">if</span> ([request.URL.absoluteString isEqualToString:<span class="string">@"https://www.baidu.com/"</span>]) &#123;</span><br><span class="line">        request.URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"https://news.qq.com"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ([request.URL.absoluteString containsString:<span class="string">@"https://www.163.com/"</span>]) &#123;</span><br><span class="line">        request.URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"https://news.sina.com.cn"</span>]; <span class="comment">//跳转网易</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> requestData:request];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5、重写方法stopLoading<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)stopLoading</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span>.task cancel];</span><br><span class="line">    <span class="keyword">self</span>.session = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>到上面这一步我们对拦截请求的功能实现完了,但是我们还需要利用session将处理后的请求转发出去,相当于把session请求到的response又交给了原来的webview去处理,代码如下:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task didCompleteWithError:(<span class="built_in">NSError</span> *)error</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (error != <span class="literal">nil</span>) &#123;</span><br><span class="line">        [<span class="keyword">self</span>.client URLProtocol:<span class="keyword">self</span> didFailWithError:error];</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        [<span class="keyword">self</span>.client URLProtocolDidFinishLoading:<span class="keyword">self</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask</span><br><span class="line">didReceiveResponse:(<span class="built_in">NSURLResponse</span> *)response</span><br><span class="line"> completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLSessionResponseDisposition</span> disposition))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span>.client URLProtocol:<span class="keyword">self</span> didReceiveResponse:response cacheStoragePolicy:<span class="built_in">NSURLCacheStorageNotAllowed</span>];</span><br><span class="line"></span><br><span class="line">    completionHandler(<span class="built_in">NSURLSessionResponseAllow</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask didReceiveData:(<span class="built_in">NSData</span> *)data</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span>.client URLProtocol:<span class="keyword">self</span> didLoadData:data];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session dataTask:(<span class="built_in">NSURLSessionDataTask</span> *)dataTask willCacheResponse:(<span class="built_in">NSCachedURLResponse</span> *)proposedResponse completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSCachedURLResponse</span> * _Nullable))completionHandler</span><br><span class="line">&#123;</span><br><span class="line">    completionHandler(proposedResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="注册CustomURLProtocol"><a href="#注册CustomURLProtocol" class="headerlink" title="注册CustomURLProtocol"></a>注册CustomURLProtocol</h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) registerClass</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *className = <span class="string">@"WKBrowsingContextController"</span>;</span><br><span class="line">    Class cls = <span class="built_in">NSClassFromString</span>(className);</span><br><span class="line">    SEL sel = <span class="built_in">NSSelectorFromString</span>(<span class="string">@"registerSchemeForCustomProtocol:"</span>);</span><br><span class="line">    <span class="keyword">if</span> ([cls respondsToSelector:sel]) &#123;</span><br><span class="line">        <span class="meta">#pragma clang diagnostic push</span></span><br><span class="line">        <span class="meta">#pragma clang diagnostic ignored <span class="meta-string">"-Warc-performSelector-leaks"</span></span></span><br><span class="line">        [cls performSelector:sel withObject:<span class="string">@"http"</span>];</span><br><span class="line">        [cls performSelector:sel withObject:<span class="string">@"https"</span>];</span><br><span class="line">        <span class="meta">#pragma clang diagnostic pop</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">NSURLProtocol</span> registerClass:[CustomURLProtocol <span class="keyword">class</span>]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注册了之后URLProtocol会拦截所有的请求,当你拦截完你某些想要的请求后,不再拦截也是可以的,这时候我们可以注销掉CustomURLProtocol<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) unregisterClass</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//注销</span></span><br><span class="line">    [<span class="built_in">NSURLProtocol</span> unregisterClass:[CustomURLProtocol <span class="keyword">class</span>]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>1、一个是要注意给已经处理过的请求一个标识,告诉CustomURLProcol这个请求我已经处理过了,不需要再次处理了,不然的话会一直循环处理,因为你把处理完的请求转发出去了,相当于又一次请求了你处理完的URL,自然就会被我们的CustomURLProtocol拦截到,你不给标识的话就会导致一直循环,请求自然就无法完成了.具体可以看canInitWithRequest:和startLoading方法里面的处理.<br>2、上面这些可以hook所有的包括get和post请求,但是post请求会存在数据丢失的问题存在,这个问题又分为两种情况,一种是正常的session post请求(包括AFNetworking),还有一种是wkwebview中夹在的post请求,在这里我的解决方案是在加载wkwebview的时候我注入了script文件夹中的js去hook了ajax的请求,把body数据存储到了本地(NSUserDefaults存储,key为请求的url, value为body数据),在需要的时候再把body数据拿出来,操作都在以下method中,具体看代码:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) requestData:(<span class="built_in">NSMutableURLRequest</span> *) request &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSInputStream</span> *bodyStream = [request HTTPBodyStream];</span><br><span class="line">    [bodyStream open];</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     一般的post请求在这边使用这个判断加操作就可以拿到body的数据,但是因为wkwebview在post请求的时候会自动丢掉body,</span></span><br><span class="line"><span class="comment">     所以我们才需要script文件夹中的脚本去hook wkwebview的body数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//判断body里面是不是有数据,有数据就copy一份出来</span></span><br><span class="line">    <span class="keyword">if</span> ([bodyStream hasBytesAvailable]) &#123;</span><br><span class="line">        <span class="built_in">NSMutableData</span> *data = [[<span class="built_in">NSMutableData</span> alloc] init];</span><br><span class="line">        uint8_t buffer[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">while</span> ([bodyStream hasBytesAvailable]) &#123;</span><br><span class="line">            <span class="built_in">NSInteger</span> len = [bodyStream read:buffer maxLength:<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">if</span> (len &gt; <span class="number">0</span> &amp;&amp; bodyStream.streamError == <span class="literal">nil</span>) &#123;</span><br><span class="line">                [data appendBytes:(<span class="keyword">void</span> *)buffer length:len];</span><br><span class="line">            &#125;</span><br><span class="line">            memset(buffer, <span class="number">0</span>, <span class="number">1024</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        request.HTTPBody = [data <span class="keyword">copy</span>];</span><br><span class="line">        [bodyStream close];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//body里面没有数据就去我们之前的缓存里面那数据</span></span><br><span class="line">        <span class="built_in">NSString</span> *key = [[[request URL] absoluteString] lowercaseString];</span><br><span class="line">        <span class="built_in">NSString</span> *data = [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] objectForKey:key];</span><br><span class="line">        [[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (data != <span class="literal">nil</span>) &#123;<span class="comment">//缓存有数据</span></span><br><span class="line">            <span class="built_in">NSDictionary</span> *dataJson = [<span class="built_in">NSJSONSerialization</span> JSONObjectWithData: [data dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>] options:<span class="number">0</span> error:<span class="literal">nil</span>];</span><br><span class="line">            <span class="keyword">if</span> (dataJson != <span class="literal">nil</span>) &#123;</span><br><span class="line">                [request setHTTPBody: [<span class="built_in">NSJSONSerialization</span> dataWithJSONObject:dataJson options:<span class="number">0</span> error:<span class="literal">nil</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                [request setHTTPBody: [data dataUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSURLSessionConfiguration</span> *configure = [<span class="built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration];</span><br><span class="line">    <span class="keyword">self</span>.session  = [<span class="built_in">NSURLSession</span> sessionWithConfiguration:configure delegate:<span class="keyword">self</span> delegateQueue:[<span class="built_in">NSOperationQueue</span> new]];</span><br><span class="line">    <span class="keyword">self</span>.task = [<span class="keyword">self</span>.session dataTaskWithRequest:request];</span><br><span class="line">    [<span class="keyword">self</span>.task resume];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>脚本文件如图<br><img src="1576990382190.jpg" alt="脚本文件"><br>js注入的代码<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WKWebViewConfiguration</span> *config = [<span class="built_in">WKWebViewConfiguration</span> new];</span><br><span class="line">    </span><br><span class="line">     <span class="comment">//将js脚本注入,然后通过WebViewPostHandler方法拿到从网页端发送过来的数据</span></span><br><span class="line">    <span class="built_in">NSString</span> *jspath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"ajaxhook.min.js"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *ajaxhook = [<span class="built_in">NSString</span> stringWithContentsOfFile:jspath encoding:<span class="built_in">NSUTF8StringEncoding</span> error:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">WKUserScript</span> *sc = [[<span class="built_in">WKUserScript</span> alloc] initWithSource:ajaxhook injectionTime:<span class="built_in">WKUserScriptInjectionTimeAtDocumentStart</span> forMainFrameOnly:<span class="literal">NO</span>];</span><br><span class="line">    [[config userContentController] addUserScript:sc];</span><br><span class="line">    </span><br><span class="line">    jspath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"jquery.min.js"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *jquery = [<span class="built_in">NSString</span> stringWithContentsOfFile:jspath encoding:<span class="built_in">NSUTF8StringEncoding</span> error:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">WKUserScript</span> *jqsc = [[<span class="built_in">WKUserScript</span> alloc] initWithSource:jquery injectionTime:<span class="built_in">WKUserScriptInjectionTimeAtDocumentStart</span> forMainFrameOnly:<span class="literal">NO</span>];</span><br><span class="line">    [[config userContentController] addUserScript:jqsc];</span><br><span class="line">    </span><br><span class="line">    jspath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"xhrhook.js"</span> ofType:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *xhrhook = [<span class="built_in">NSString</span> stringWithContentsOfFile:jspath encoding:<span class="built_in">NSUTF8StringEncoding</span> error:<span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">WKUserScript</span> *xhrhooksc = [[<span class="built_in">WKUserScript</span> alloc] initWithSource:xhrhook injectionTime:<span class="built_in">WKUserScriptInjectionTimeAtDocumentStart</span> forMainFrameOnly:<span class="literal">NO</span>];</span><br><span class="line">    [[config userContentController] addUserScript:xhrhooksc];</span><br><span class="line">    </span><br><span class="line">    WebViewPostHandler *postHandler = [WebViewPostHandler new];</span><br><span class="line">    [[config userContentController] addScriptMessageHandler:postHandler name:<span class="string">@"save"</span>];</span><br></pre></td></tr></table></figure></p>
+<p>我这边是利用WebViewPostHandler接收从web端发送过来的数据,然后保存下来了,具体看Demo吧,代码放太多了,看得有点晕.</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>效果图<br><img src="hookRequest.gif" alt="HookRequest"><br>最后奉上<a href="https://github.com/fenglee594/WKWebViewRequestHook.git" target="_blank" rel="noopener">Demo传送门</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WKWebview/" rel="tag"># WKWebview</a>
+          
+            <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/11/iOS-WKWebView与JS交互/" rel="next" title="iOS-WKWebView与JS交互">
+                <i class="fa fa-chevron-left"></i> iOS-WKWebView与JS交互
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Feng" />
+            
+              <p class="site-author-name" itemprop="name">Feng</p>
+              <p class="site-description motion-element" itemprop="description">少年不识愁滋味，为赋新词强说愁。<br>而今识尽愁滋味，却道天凉好个秋。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#了解NSURLProtocol"><span class="nav-number">2.</span> <span class="nav-text">了解NSURLProtocol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo内容"><span class="nav-number">3.</span> <span class="nav-text">Demo内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建CustomURLProtocol必须实现的几个方法"><span class="nav-number">3.2.</span> <span class="nav-text">创建CustomURLProtocol必须实现的几个方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册CustomURLProtocol"><span class="nav-number">3.3.</span> <span class="nav-text">注册CustomURLProtocol</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo"><span class="nav-number">5.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'fenglee594',
+            repo: 'Blog-Comments',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '502a58f2b53fbdf46ca60b92cad7e6f3c1f57370',
+            
+                client_id: '957cebf1020c9ba82e62'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
