@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="知识点iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+<meta name="description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="keywords" content="小马哥底层原理学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS对象的分类">
 <meta property="og:url" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/index.html">
 <meta property="og:site_name" content="Feng&#39;s Blog">
-<meta property="og:description" content="知识点iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+<meta property="og:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
-<meta property="og:updated_time" content="2020-05-29T09:25:53.725Z">
+<meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat8ee94ffee69c1dc59b49ab84c1a7607b.png">
+<meta property="og:updated_time" content="2020-06-08T08:50:14.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS对象的分类">
-<meta name="twitter:description" content="知识点iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+<meta name="twitter:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="twitter:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
 
 
@@ -354,7 +355,7 @@
       
 
       
-        <h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><p>iOS对象分为以下三类</p>
+        <h4 id="对象的分类"><a href="#对象的分类" class="headerlink" title="对象的分类"></a>对象的分类</h4><p>iOS对象分为以下三类</p>
 <ul>
 <li>实例对象(instance对象)</li>
 <li>类对象(class对象)</li>
@@ -376,13 +377,22 @@
 <li>类的属性信息(@property)、类的实例方法信息(instance method)</li>
 <li>类的协议信息(protocol)、类的成员变量信息(不包括成员变量的值) 等等其他</li>
 </ul>
-<h5 id="元类对象"><a href="#元类对象" class="headerlink" title="元类对象"></a>元类对象</h5><p>meta-class是用来描述类对象的类.<br>获取元类对象的方法是将类对象传到object_getClass()方法中获取的参考类对象的代码我们可以<br><code>Class metaClass = object_getClass(objectClass1)</code><br>这样获取,metaClass就是NSObject的元类对象.</p>
+<h5 id="元类对象"><a href="#元类对象" class="headerlink" title="元类对象"></a>元类对象</h5><p>meta-class是用来描述类对象的类.每个类都有自己对应的元类对象<br>获取元类对象的方法是将类对象传到object_getClass()方法中获取的参考类对象的代码我们可以<br><code>Class metaClass = object_getClass(objectClass1)</code><br>这样获取,metaClass就是NSObject的元类对象.</p>
 <p>元类对象中存储的信息</p>
 <ul>
 <li>isa指针</li>
 <li>superclass指针</li>
 <li>类方法信息</li>
 </ul>
+<h4 id="isa和superclass的指向"><a href="#isa和superclass的指向" class="headerlink" title="isa和superclass的指向"></a>isa和superclass的指向</h4><p><img src="WeChat8ee94ffee69c1dc59b49ab84c1a7607b.png" alt="" title="关系图"><br>上面这张图可以完美解释isa和superclass在实例对象、类对象和元类对象中的作用<br>总结一下有以下几点</p>
+<ul>
+<li>instance的isa指向class<br>class的isa指向meta-class<br>meta-class的isa指向基类的meta-class</li>
+<li>class的superclass指向父类的class<br>如果没有父类,superclass指针为nil</li>
+<li>meta-class的superclass指向父类的meta-class   基类meta-class的superclass指向基类的class</li>
+<li>instance调用实例方法的轨迹<br>通过isa找到class对象,方法不存在,就通过superclass找父类</li>
+<li>class调用类方法的轨迹<br>通过isa找到meta-class对象,方法不存在,就通过superclass找父类</li>
+</ul>
+<p>总之可以看出,调用方法时,首先你要搞清楚方法是在哪里(实例方法是存储在类对象里面,类方法是存储在元类对象里面),然后通过isa找到对应的对象,找不到就再通过superclass去父类里面找.isa-&gt;superclass-&gt;…-&gt;superclass=nil,如果最终还是找不到就会报经典错误unrecognized selector sent to xxx.</p>
 
       
     </div>
@@ -564,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">1.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">1.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">1.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的分类"><span class="nav-number">1.</span> <span class="nav-text">对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">1.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">1.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">1.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isa和superclass的指向"><span class="nav-number">2.</span> <span class="nav-text">isa和superclass的指向</span></a></li></ol></div>
             
 
           </div>
