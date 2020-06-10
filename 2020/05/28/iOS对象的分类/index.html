@@ -82,16 +82,17 @@
 <meta name="description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="keywords" content="小马哥底层原理学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS对象的分类">
+<meta property="og:title" content="iOS对象解读">
 <meta property="og:url" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/index.html">
 <meta property="og:site_name" content="Feng&#39;s Blog">
 <meta property="og:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat8ee94ffee69c1dc59b49ab84c1a7607b.png">
-<meta property="og:updated_time" content="2020-06-08T08:50:14.478Z">
+<meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat9872c5853b4a5aab8fa5548f45bc92e2.png">
+<meta property="og:updated_time" content="2020-06-10T11:57:41.969Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS对象的分类">
+<meta name="twitter:title" content="iOS对象解读">
 <meta name="twitter:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="twitter:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
 
@@ -129,7 +130,7 @@
 
 
 
-  <title>iOS对象的分类 | Feng's Blog</title>
+  <title>iOS对象解读 | Feng's Blog</title>
   
 
 
@@ -273,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS对象的分类</h1>
+          <h1 class="post-title" itemprop="name headline">iOS对象解读</h1>
         
 
         <div class="post-meta">
@@ -321,16 +322,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/05/28/iOS对象的分类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/05/28/iOS对象的分类/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -368,7 +359,7 @@
 <li>isa指针</li>
 <li>其他成员变量(isa也可以看作一个特殊的成员变量)</li>
 </ul>
-<h5 id="类对象"><a href="#类对象" class="headerlink" title="类对象"></a>类对象</h5><p>class对象是一个类的对象,每个类在内存中有且仅有一个类对象<br>获取类对象的方法有如下几种<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *object1 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"><span class="built_in">NSObject</span> *object2 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"></span><br><span class="line">Class objectClass1 = [object1 <span class="keyword">class</span>];   <span class="comment">//调用实例方法class</span></span><br><span class="line">Class objectClass2 = [object2 <span class="keyword">class</span>];   <span class="comment">//同上</span></span><br><span class="line">Class objectClass3 = object_getClass(object1);  <span class="comment">//使用runtime的object_getClass方法(传入一个实例对象)</span></span><br><span class="line">Class objectClass4 = object_getClass(object2);</span><br><span class="line">Class objectClass5 = [<span class="built_in">NSObject</span> <span class="keyword">class</span>];  <span class="comment">//调用类方法class</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%p %p %p %p %p"</span>,</span><br><span class="line">              objectClass1,</span><br><span class="line">              objectClass2,</span><br><span class="line">              objectClass3,</span><br><span class="line">              objectClass4,</span><br><span class="line">              objectClass5);</span><br></pre></td></tr></table></figure></p>
+<h5 id="类对象"><a href="#类对象" class="headerlink" title="类对象"></a>类对象</h5><p>class对象是一个类的对象,每个类在内存中有且仅有一个类对象,类对象(元类对象也一样)在程序启动时就已经装载在内存中了.<br>获取类对象的方法有如下几种<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSObject</span> *object1 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"><span class="built_in">NSObject</span> *object2 = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line"></span><br><span class="line">Class objectClass1 = [object1 <span class="keyword">class</span>];   <span class="comment">//调用实例方法class</span></span><br><span class="line">Class objectClass2 = [object2 <span class="keyword">class</span>];   <span class="comment">//同上</span></span><br><span class="line">Class objectClass3 = object_getClass(object1);  <span class="comment">//使用runtime的object_getClass方法(传入一个实例对象)</span></span><br><span class="line">Class objectClass4 = object_getClass(object2);</span><br><span class="line">Class objectClass5 = [<span class="built_in">NSObject</span> <span class="keyword">class</span>];  <span class="comment">//调用类方法class</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%p %p %p %p %p"</span>,</span><br><span class="line">              objectClass1,</span><br><span class="line">              objectClass2,</span><br><span class="line">              objectClass3,</span><br><span class="line">              objectClass4,</span><br><span class="line">              objectClass5);</span><br></pre></td></tr></table></figure></p>
 <p>打印结果如下图,我们可以看到地址都是一样的,这表明NSObject在内存中有且仅有一个类对象<br><img src="WeChat169539cf0dff79428234a43af54db574.png" alt="" title="打印结果"></p>
 <p>类对象存储的信息有</p>
 <ul>
@@ -393,6 +384,18 @@
 <li>class调用类方法的轨迹<br>通过isa找到meta-class对象,方法不存在,就通过superclass找父类</li>
 </ul>
 <p>总之可以看出,调用方法时,首先你要搞清楚方法是在哪里(实例方法是存储在类对象里面,类方法是存储在元类对象里面),然后通过isa找到对应的对象,找不到就再通过superclass去父类里面找.isa-&gt;superclass-&gt;…-&gt;superclass=nil,如果最终还是找不到就会报经典错误unrecognized selector sent to xxx.</p>
+<p>注意一点,在64位的环境下,instance对象的isa并不是直接指向类对象的,他会通过一次&amp;位运算才能计算出真实的类对象地址instance-&gt;isa &amp; ISA_MASK = class对象的内存地址,ISA_MASK的值可以在objc源码中找到.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># if __arm64__</span></span><br><span class="line"><span class="meta">#   define ISA_MASK        0x0000000ffffffff8ULL</span></span><br><span class="line"><span class="meta"># elif __x86_64__</span></span><br><span class="line"><span class="meta">#   define ISA_MASK        0x00007ffffffffff8ULL</span></span><br></pre></td></tr></table></figure></p>
+<p>但superclass指针则是直接指向父类对象的真实地址</p>
+<h4 id="Class的结构"><a href="#Class的结构" class="headerlink" title="Class的结构"></a>Class的结构</h4><p>我们在Xcode上追踪Class的结构可以看到<br><code>typedef struct objc_class *Class;</code><br>再追踪进去看objc_class的结构,发现是这样的<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_class &#123;</span><br><span class="line">    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line"></span><br><span class="line"><span class="meta">#if !__OBJC2__</span></span><br><span class="line">    Class _Nullable super_class                              OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * _Nonnull name                               OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">long</span> version                                             OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">long</span> info                                                OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">long</span> instance_size                                       OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">struct</span> objc_ivar_list * _Nullable ivars                  OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">struct</span> objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">struct</span> objc_cache * _Nonnull cache                       OBJC2_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">struct</span> objc_protocol_list * _Nullable protocols          OBJC2_UNAVAILABLE;</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">&#125; OBJC2_UNAVAILABLE;</span><br></pre></td></tr></table></figure></p>
+<p>这表明在OC2.0里面objc_class的结构体里只有一个isa指针,下面的都已经过时了,这时候我们需要去<a href="https://opensource.apple.com/tarballs/objc4/" target="_blank" rel="noopener">objc</a>的源码工程里面去找了,找到以下代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_class</span> :</span> objc_object &#123;</span><br><span class="line">    <span class="comment">// ISA占8位</span></span><br><span class="line">    <span class="comment">// Class ISA;</span></span><br><span class="line">    <span class="comment">// superclass占8位</span></span><br><span class="line">    Class superclass;</span><br><span class="line">    <span class="comment">// 缓存的是指针和vtable,目的是加速方法的调用  cache占16位</span></span><br><span class="line">    <span class="keyword">cache_t</span> cache;             <span class="comment">// formerly cache pointer and vtable</span></span><br><span class="line">    <span class="comment">// class_data_bits_t 相当于是class_rw_t 指针加上rr/alloc标志</span></span><br><span class="line">    <span class="keyword">class_data_bits_t</span> bits;    <span class="comment">// class_rw_t * plus custom rr/alloc flags</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">class_rw_t</span> *data() &#123;</span><br><span class="line">        <span class="comment">// 这里的bits就是class_data_bits_t bits;</span></span><br><span class="line">        <span class="keyword">return</span> bits.data();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...还有很多的方法,我这边就不列举出来了,主要是看看里面的成员</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发现objc_class结构体实际上是继承objc_object的,然后我们再去看看objc_object<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> &#123;</span></span><br><span class="line">    <span class="comment">// isa结构体</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">isa_t</span> isa;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ISA() assumes this is NOT a tagged pointer object</span></span><br><span class="line">    <span class="function">Class <span class="title">ISA</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getIsa() allows this to be a tagged pointer object</span></span><br><span class="line">    <span class="function">Class <span class="title">getIsa</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//...等等很多其他方法,这边忽略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到objc_object的结构体里面只有一个isa,所以objc_class的结构体里面有isa、superclass、cache、bits和一个class_rw_t *data(),可以看到是直接返回的bits.data(),跟进去看下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class_rw_t</span>* data() &#123;</span><br><span class="line">        <span class="comment">// FAST_DATA_MASK的值是0x00007ffffffffff8UL</span></span><br><span class="line">        <span class="comment">// bits和FAST_DATA_MASK按位与，实际上就是取了bits中的[3,46]位</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">class_rw_t</span> *)(bits &amp; FAST_DATA_MASK);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到就是bits和FAST_DATA_MASK进行了了一次位与运算,然后强制转成class_rw_t类型,然后我们进去看下class_rw_t的结构<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类的方法、属性、协议等信息都保存在class_rw_t结构体中</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">class_rw_t</span> &#123;</span></span><br><span class="line">    <span class="comment">// Be warned that Symbolication knows the layout of this structure.</span></span><br><span class="line">    <span class="keyword">uint32_t</span> flags;</span><br><span class="line">    <span class="keyword">uint32_t</span> version;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">class_ro_t</span> *ro;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方法信息</span></span><br><span class="line">    <span class="keyword">method_array_t</span> methods;</span><br><span class="line">    <span class="comment">// 属性信息</span></span><br><span class="line">    <span class="keyword">property_array_t</span> properties;</span><br><span class="line">    <span class="comment">// 协议信息</span></span><br><span class="line">    <span class="keyword">protocol_array_t</span> protocols;</span><br><span class="line"></span><br><span class="line">    Class firstSubclass;</span><br><span class="line">    Class nextSiblingClass;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *demangledName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到这个里面就有方法信息、属性信息和协议信息,还有一个只读的ro表,跟踪下去可以看到<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// class_ro_t结构体存储了类在编译期就已经确定的属性、方法以及遵循的协议</span></span><br><span class="line"><span class="comment">// 因为在编译期就已经确定了，所以是ro(readonly)的，不可修改</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">class_ro_t</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> flags;</span><br><span class="line">    <span class="keyword">uint32_t</span> instanceStart;</span><br><span class="line">    <span class="keyword">uint32_t</span> instanceSize;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __LP64__</span></span><br><span class="line">    <span class="keyword">uint32_t</span> reserved;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">uint8_t</span> * ivarLayout;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * name;</span><br><span class="line">    <span class="comment">// 方法列表</span></span><br><span class="line">    <span class="keyword">method_list_t</span> * baseMethodList;</span><br><span class="line">    <span class="comment">// 协议列表</span></span><br><span class="line">    <span class="keyword">protocol_list_t</span> * baseProtocols;</span><br><span class="line">    <span class="comment">// 变量列表</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">ivar_list_t</span> * ivars;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">uint8_t</span> * weakIvarLayout;</span><br><span class="line">    <span class="comment">// 属性列表</span></span><br><span class="line">    <span class="keyword">property_list_t</span> *baseProperties;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">method_list_t</span> *baseMethods() <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> baseMethodList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到这个里面也有方法、协议等信息,这是因为ro表里面存储的是在编译期间就已经确定的信息,这里面的信息只可以读取不可以写入,通过这些信息整理一下,可以得到整个class的结构.<br><img src="WeChat9872c5853b4a5aab8fa5548f45bc92e2.png" alt="" title="objc_class结构图"></p>
+<blockquote>
+<p>Mark一篇更为详细的文章<a href="http://vanney9.com/2017/06/05/objective-c-runtime-property-method/" target="_blank" rel="noopener">Objective-C runtime - 属性与方法</a></p>
+</blockquote>
 
       
     </div>
@@ -462,9 +465,7 @@
 
   
     <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjg0Mi8xOTM4OQ=="></div>
     </div>
 
   
@@ -574,7 +575,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的分类"><span class="nav-number">1.</span> <span class="nav-text">对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">1.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">1.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">1.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isa和superclass的指向"><span class="nav-number">2.</span> <span class="nav-text">isa和superclass的指向</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的分类"><span class="nav-number">1.</span> <span class="nav-text">对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">1.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">1.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">1.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isa和superclass的指向"><span class="nav-number">2.</span> <span class="nav-text">isa和superclass的指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的结构"><span class="nav-number">3.</span> <span class="nav-text">Class的结构</span></a></li></ol></div>
             
 
           </div>
@@ -753,48 +754,22 @@
 
 
   
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
 
 
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname, 
-            owner: 'fenglee594',
-            repo: 'Blog-Comments',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: '502a58f2b53fbdf46ca60b92cad7e6f3c1f57370',
-            
-                client_id: '957cebf1020c9ba82e62'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
-    
 
 
 
