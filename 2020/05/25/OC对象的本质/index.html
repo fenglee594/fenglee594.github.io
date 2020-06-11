@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Feng's Blog" type="application/atom+xml" />
+
 
 
 
@@ -82,16 +84,16 @@
 <meta name="description" content="前言其实去年年底看过一遍这个教程了,但是没有系统的记录下来很多东西都忘记了,所以这次打算重新学习一下,并且记录一些我认为的知识重点.">
 <meta name="keywords" content="小马哥底层原理学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OC对象的本质">
+<meta property="og:title" content="Objective-C 对象的本质">
 <meta property="og:url" content="http://fenglee594.github.io/2020/05/25/OC对象的本质/index.html">
 <meta property="og:site_name" content="Feng&#39;s Blog">
 <meta property="og:description" content="前言其实去年年底看过一遍这个教程了,但是没有系统的记录下来很多东西都忘记了,所以这次打算重新学习一下,并且记录一些我认为的知识重点.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/25/OC对象的本质/WeChat2c7ebbc20545545aed8859d5e3b0938a.png">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/25/OC对象的本质/1590565668018.jpg">
-<meta property="og:updated_time" content="2020-05-28T07:26:05.423Z">
+<meta property="og:updated_time" content="2020-06-10T12:23:22.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OC对象的本质">
+<meta name="twitter:title" content="Objective-C 对象的本质">
 <meta name="twitter:description" content="前言其实去年年底看过一遍这个教程了,但是没有系统的记录下来很多东西都忘记了,所以这次打算重新学习一下,并且记录一些我认为的知识重点.">
 <meta name="twitter:image" content="http://fenglee594.github.io/2020/05/25/OC对象的本质/WeChat2c7ebbc20545545aed8859d5e3b0938a.png">
 
@@ -129,7 +131,7 @@
 
 
 
-  <title>OC对象的本质 | Feng's Blog</title>
+  <title>Objective-C 对象的本质 | Feng's Blog</title>
   
 
 
@@ -273,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OC对象的本质</h1>
+          <h1 class="post-title" itemprop="name headline">Objective-C 对象的本质</h1>
         
 
         <div class="post-meta">
@@ -321,6 +323,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/25/OC对象的本质/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/25/OC对象的本质/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -328,6 +340,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -411,8 +454,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/28/iOS对象的分类/" rel="prev" title="iOS对象解读">
-                iOS对象解读 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/28/iOS对象的分类/" rel="prev" title="Objective-C 对象解读">
+                Objective-C 对象解读 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +573,28 @@
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fenglee594" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/fenglee594" target="_blank" title="微博">
+                      微博</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -643,6 +707,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -677,6 +744,16 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
   
 
 
@@ -753,6 +830,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'wmQKqzvpjuYpR4gqFrVeci5L-gzGzoHsz',
+        appKey: 'T3ojvYRDxadeS8zwCMQForfT',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

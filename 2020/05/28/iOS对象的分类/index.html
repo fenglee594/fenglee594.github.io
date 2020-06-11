@@ -74,26 +74,28 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Feng's Blog" type="application/atom+xml" />
 
 
 
 
 
-<meta name="description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+
+<meta name="description" content="前言写Blog也是一门技术啊,我现在还是门外汉,写的有点烂.主要还是当作给自己一些记录吧,至于别人能从我这里学到一些知识是最好,学不到也不能怪我哦.当然,欢迎提供建议. 对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="keywords" content="小马哥底层原理学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS对象解读">
+<meta property="og:title" content="Objective-C 对象解读">
 <meta property="og:url" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/index.html">
 <meta property="og:site_name" content="Feng&#39;s Blog">
-<meta property="og:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+<meta property="og:description" content="前言写Blog也是一门技术啊,我现在还是门外汉,写的有点烂.主要还是当作给自己一些记录吧,至于别人能从我这里学到一些知识是最好,学不到也不能怪我哦.当然,欢迎提供建议. 对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat8ee94ffee69c1dc59b49ab84c1a7607b.png">
 <meta property="og:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat9872c5853b4a5aab8fa5548f45bc92e2.png">
-<meta property="og:updated_time" content="2020-06-10T11:57:41.969Z">
+<meta property="og:updated_time" content="2020-06-10T12:27:30.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS对象解读">
-<meta name="twitter:description" content="对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
+<meta name="twitter:title" content="Objective-C 对象解读">
+<meta name="twitter:description" content="前言写Blog也是一门技术啊,我现在还是门外汉,写的有点烂.主要还是当作给自己一些记录吧,至于别人能从我这里学到一些知识是最好,学不到也不能怪我哦.当然,欢迎提供建议. 对象的分类iOS对象分为以下三类  实例对象(instance对象) 类对象(class对象) 元类对象(meta-class对象)">
 <meta name="twitter:image" content="http://fenglee594.github.io/2020/05/28/iOS对象的分类/WeChat169539cf0dff79428234a43af54db574.png">
 
 
@@ -130,7 +132,7 @@
 
 
 
-  <title>iOS对象解读 | Feng's Blog</title>
+  <title>Objective-C 对象解读 | Feng's Blog</title>
   
 
 
@@ -274,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS对象解读</h1>
+          <h1 class="post-title" itemprop="name headline">Objective-C 对象解读</h1>
         
 
         <div class="post-meta">
@@ -322,6 +324,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/28/iOS对象的分类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/28/iOS对象的分类/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -329,6 +341,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -346,7 +389,8 @@
       
 
       
-        <h4 id="对象的分类"><a href="#对象的分类" class="headerlink" title="对象的分类"></a>对象的分类</h4><p>iOS对象分为以下三类</p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>写Blog也是一门技术啊,我现在还是门外汉,写的有点烂.主要还是当作给自己一些记录吧,至于别人能从我这里学到一些知识是最好,学不到也不能怪我哦.当然,欢迎提供建议.</p>
+<h4 id="对象的分类"><a href="#对象的分类" class="headerlink" title="对象的分类"></a>对象的分类</h4><p>iOS对象分为以下三类</p>
 <ul>
 <li>实例对象(instance对象)</li>
 <li>类对象(class对象)</li>
@@ -426,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/25/OC对象的本质/" rel="next" title="OC对象的本质">
-                <i class="fa fa-chevron-left"></i> OC对象的本质
+              <a href="/2020/05/25/OC对象的本质/" rel="next" title="Objective-C 对象的本质">
+                <i class="fa fa-chevron-left"></i> Objective-C 对象的本质
               </a>
             
           </div>
@@ -551,7 +595,28 @@
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fenglee594" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/fenglee594" target="_blank" title="微博">
+                      微博</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -575,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的分类"><span class="nav-number">1.</span> <span class="nav-text">对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">1.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">1.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">1.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isa和superclass的指向"><span class="nav-number">2.</span> <span class="nav-text">isa和superclass的指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的结构"><span class="nav-number">3.</span> <span class="nav-text">Class的结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的分类"><span class="nav-number">2.</span> <span class="nav-text">对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例对象"><span class="nav-number">2.1.</span> <span class="nav-text">实例对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类对象"><span class="nav-number">2.2.</span> <span class="nav-text">类对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元类对象"><span class="nav-number">2.3.</span> <span class="nav-text">元类对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isa和superclass的指向"><span class="nav-number">3.</span> <span class="nav-text">isa和superclass的指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的结构"><span class="nav-number">4.</span> <span class="nav-text">Class的结构</span></a></li></ol></div>
             
 
           </div>
@@ -664,6 +729,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -698,6 +766,16 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
   
 
 
@@ -774,6 +852,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'wmQKqzvpjuYpR4gqFrVeci5L-gzGzoHsz',
+        appKey: 'T3ojvYRDxadeS8zwCMQForfT',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
