@@ -82,19 +82,19 @@
 
 
 <meta name="description" content="前言现在很多app都会使用一些h5页面来代替一些要求灵活性的页面,这时候肯定会涉及到一些wkwebview和js交互的问题,写了个小demo以便更好的理解和记住知识点.">
-<meta name="keywords" content="wkwebview,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS-WKWebView与JS交互">
-<meta property="og:url" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView与JS交互/index.html">
+<meta property="og:url" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92/index.html">
 <meta property="og:site_name" content="Feng&#39;s Blog">
 <meta property="og:description" content="前言现在很多app都会使用一些h5页面来代替一些要求灵活性的页面,这时候肯定会涉及到一些wkwebview和js交互的问题,写了个小demo以便更好的理解和记住知识点.">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView与JS交互/demo_2019_03_11.jpg">
-<meta property="og:updated_time" content="2019-07-09T11:53:43.887Z">
+<meta property="og:image" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92/demo_2019_03_11.jpg">
+<meta property="article:published_time" content="2019-03-11T09:11:40.000Z">
+<meta property="article:modified_time" content="2019-07-09T11:53:43.887Z">
+<meta property="article:author" content="Feng">
+<meta property="article:tag" content="wkwebview">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS-WKWebView与JS交互">
-<meta name="twitter:description" content="前言现在很多app都会使用一些h5页面来代替一些要求灵活性的页面,这时候肯定会涉及到一些wkwebview和js交互的问题,写了个小demo以便更好的理解和记住知识点.">
-<meta name="twitter:image" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView与JS交互/demo_2019_03_11.jpg">
+<meta name="twitter:image" content="http://fenglee594.github.io/2019/03/11/iOS-WKWebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92/demo_2019_03_11.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -186,7 +186,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -196,7 +196,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/tags/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -206,7 +206,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/categories/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -216,7 +216,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fenglee594.github.io/2019/03/11/iOS-WKWebView与JS交互/">
+    <link itemprop="mainEntityOfPage" href="http://fenglee594.github.io/2019/03/11/iOS-WKWebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Feng">
@@ -326,7 +326,7 @@
 
           
           
-             <span id="/2019/03/11/iOS-WKWebView与JS交互/" class="leancloud_visitors" data-flag-title="iOS-WKWebView与JS交互">
+             <span id="/2019/03/11/iOS-WKWebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92/" class="leancloud_visitors" data-flag-title="iOS-WKWebView与JS交互">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -351,7 +351,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
+                  660
                 </span>
               
 
@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  
+                  2
                 </span>
               
             </div>
@@ -388,19 +388,25 @@
       
 
       
-        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>现在很多app都会使用一些h5页面来代替一些要求灵活性的页面,这时候肯定会涉及到一些wkwebview和js交互的问题,写了个小demo以便更好的理解和记住知识点.<br><a id="more"></a></p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>现在很多app都会使用一些h5页面来代替一些要求灵活性的页面,这时候肯定会涉及到一些wkwebview和js交互的问题,写了个小demo以便更好的理解和记住知识点.</p>
+<a id="more"></a>
+
 <h4 id="该例子思路"><a href="#该例子思路" class="headerlink" title="该例子思路"></a>该例子思路</h4><p>通过利用一个简单的弹窗效果展示从H5端利用js发送的数据,和改变H5页面的文字测试iOS调用js的效果从而达到交互的目的</p>
 <h4 id="WKWebView与js的交互"><a href="#WKWebView与js的交互" class="headerlink" title="WKWebView与js的交互"></a>WKWebView与js的交互</h4><h5 id="JS调用OC"><a href="#JS调用OC" class="headerlink" title="JS调用OC"></a>JS调用OC</h5><p>JS调用OC,我们首先需要了解的就是WKScriptMessageHandler,我们通过遵循了这个协议的类来获取网页端传过来的数据</p>
 <h6 id="WKScriptMessageHandler"><a href="#WKScriptMessageHandler" class="headerlink" title="WKScriptMessageHandler"></a>WKScriptMessageHandler</h6><p>关于WKScriptMessageHandler,我们先看看官方文档的说明</p>
 <blockquote>
-<p>A class conforming to the WKScriptMessageHandler protocol provides a method for receiving messages from JavaScript running in a webpage.<br>翻译一下就是:WKScriptMessageHandler协议为遵循它的类提供了一个方法来接收在网页端运行的js中的消息.</p>
-<pre><code>- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message;//就是该方法
-</code></pre></blockquote>
-<p>首先我们要新建一个类遵循WKScriptMessageHandler的协议,并实现上面的那个方法,代码如下<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DSLFGameWebHandler</span> : <span class="title">NSObject</span> &lt;<span class="title">WKScriptMessageHandler</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DSLFGameWebHandler</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)userContentController:(<span class="built_in">WKUserContentController</span> *)userContentController didReceiveScriptMessage:(<span class="built_in">WKScriptMessage</span> *)message&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSString</span> *info = message.body; <span class="comment">//网页端传过来的数据在body里面,如果是json数据在这里就需要将其序列化,转成我们想要的格式</span></span><br><span class="line">    [[[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"测试"</span> message:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"js调用了oc方法,传过来的数据为:%@"</span>,info] delegate:<span class="literal">nil</span> cancelButtonTitle:<span class="string">@"好的"</span> otherButtonTitles:<span class="literal">nil</span>, <span class="literal">nil</span>] show];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>怎么利用WKScriptMessageHandler去监听呢?在初始化wkwebview的时候配置一下configuration就可以了,不过需要跟网页端设定一个通用的<label style="color: red">名字</label>,如下代码设定的就是<label style="color: red">DSLFTest</label>:<br>iOS端配置代码<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WKWebViewConfiguration</span> *configuration = [<span class="built_in">WKWebViewConfiguration</span> new];</span><br><span class="line">[configuration.userContentController addScriptMessageHandler:_webHandler name:<span class="string">@"DSLFTest"</span>];</span><br><span class="line">_webView = [[<span class="built_in">WKWebView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">UIScreen</span>.mainScreen.bounds.size.width, <span class="built_in">UIScreen</span>.mainScreen.bounds.size.height) configuration:configuration];</span><br></pre></td></tr></table></figure></p>
-<p>H5端往iOS端发送数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">h5ButtonClicked</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//js调用OC</span></span><br><span class="line">    <span class="built_in">window</span>.webkit.messageHandlers.DSLFTest.postMessage(<span class="string">'你好啊'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A class conforming to the WKScriptMessageHandler protocol provides a method for receiving messages from JavaScript running in a webpage.<br>翻译一下就是:WKScriptMessageHandler协议为遵循它的类提供了一个方法来接收在网页端运行的js中的消息.<br>    - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message;//就是该方法</p>
+</blockquote>
+<p>首先我们要新建一个类遵循WKScriptMessageHandler的协议,并实现上面的那个方法,代码如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">DSLFGameWebHandler</span> : <span class="title">NSObject</span> &lt;<span class="title">WKScriptMessageHandler</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">DSLFGameWebHandler</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)userContentController:(<span class="built_in">WKUserContentController</span> *)userContentController didReceiveScriptMessage:(<span class="built_in">WKScriptMessage</span> *)message&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSString</span> *info = message.body; <span class="comment">//网页端传过来的数据在body里面,如果是json数据在这里就需要将其序列化,转成我们想要的格式</span></span><br><span class="line">    [[[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"测试"</span> message:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"js调用了oc方法,传过来的数据为:%@"</span>,info] delegate:<span class="literal">nil</span> cancelButtonTitle:<span class="string">@"好的"</span> otherButtonTitles:<span class="literal">nil</span>, <span class="literal">nil</span>] show];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>怎么利用WKScriptMessageHandler去监听呢?在初始化wkwebview的时候配置一下configuration就可以了,不过需要跟网页端设定一个通用的<label style="color: red">名字</label>,如下代码设定的就是<label style="color: red">DSLFTest</label>:<br>iOS端配置代码</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">WKWebViewConfiguration</span> *configuration = [<span class="built_in">WKWebViewConfiguration</span> new];</span><br><span class="line">[configuration.userContentController addScriptMessageHandler:_webHandler name:<span class="string">@"DSLFTest"</span>];</span><br><span class="line">_webView = [[<span class="built_in">WKWebView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="built_in">UIScreen</span>.mainScreen.bounds.size.width, <span class="built_in">UIScreen</span>.mainScreen.bounds.size.height) configuration:configuration];</span><br></pre></td></tr></table></figure>
+<p>H5端往iOS端发送数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">h5ButtonClicked</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//js调用OC</span></span><br><span class="line">    <span class="built_in">window</span>.webkit.messageHandlers.DSLFTest.postMessage(<span class="string">'你好啊'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h5 id="OC调用JS方法"><a href="#OC调用JS方法" class="headerlink" title="OC调用JS方法"></a>OC调用JS方法</h5><p>相对而言,这个比较简单,可以直接通过wkwebview的一个方法就可以实现了,代码如下</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//iOS端调用代码</span></span><br><span class="line">- (<span class="keyword">void</span>)webView:(<span class="built_in">WKWebView</span> *)webView didFinishNavigation:(<span class="built_in">WKNavigation</span> *)navigation</span><br><span class="line">&#123;   <span class="comment">//再webview加载完成的时候调用了ocTransferJs的方法,其中单引号的文字是js方法中的参数</span></span><br><span class="line">    [_webView evaluateJavaScript:<span class="string">@"ocTransferJs('oc调用js')"</span> completionHandler:^(<span class="keyword">id</span> _Nullable da, <span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error != <span class="literal">nil</span>) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[error localizedDescription]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//H5页面中的js方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ocTransferJs</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//oc调用js</span></span><br><span class="line">    <span class="comment">//改变div1的文字</span></span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"div1"</span>).innerHTML=a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//原本div1元素的文字</span></span><br><span class="line">&lt;div id=<span class="string">"div1"</span> style=<span class="string">"height: 30px;text-align: center;top: 200px;font-size: 30pt;"</span>&gt;这是一个测试文件&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="demo效果展示"><a href="#demo效果展示" class="headerlink" title="demo效果展示"></a>demo效果展示</h4><p><img src="demo_2019_03_11.jpg" alt=""></p>
 <h5 id="代码传送"><a href="#代码传送" class="headerlink" title="代码传送"></a>代码传送</h5><p><a href="https://github.com/fenglee594/iOS-WKWebview-Demo.git" target="_blank" rel="noopener">GitHub地址</a></p>
@@ -423,7 +429,7 @@
           
             <a href="/tags/wkwebview/" rel="tag"># wkwebview</a>
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+            <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
           
         </div>
       
@@ -436,7 +442,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/真滴烦/" rel="next" title="真滴烦">
+              <a href="/2019/03/05/%E7%9C%9F%E6%BB%B4%E7%83%A6/" rel="next" title="真滴烦">
                 <i class="fa fa-chevron-left"></i> 真滴烦
               </a>
             
@@ -446,7 +452,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/22/iOS拦截网络请求/" rel="prev" title="iOS拦截(包括但不限于)WKWebView的Http、Https网络请求">
+              <a href="/2019/12/22/iOS%E6%8B%A6%E6%88%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" rel="prev" title="iOS拦截(包括但不限于)WKWebView的Http、Https网络请求">
                 iOS拦截(包括但不限于)WKWebView的Http、Https网络请求 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -532,7 +538,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
@@ -578,12 +584,14 @@
                 
                   <span class="links-of-author-item">
                     <a href="https://github.com/fenglee594" target="_blank" title="GitHub">
-                      GitHub</a>
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
                 
                   <span class="links-of-author-item">
                     <a href="https://weibo.com/fenglee594" target="_blank" title="微博">
-                      微博</a>
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
                   </span>
                 
             </div>
