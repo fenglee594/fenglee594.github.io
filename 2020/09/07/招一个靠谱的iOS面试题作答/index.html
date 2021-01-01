@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试题," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Feng's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言上段时间去久邦和YY面试了几次，发现还是有挺多知识点有点模糊不清，其实挺多东西知道但是没有表达清楚，所以趁现在有时间把网上很经典的《招一个靠谱的iOS》面试题刷一遍，自己作答一遍以便查漏补缺。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="招一个靠谱的iOS面试题作答">
+<meta property="og:url" content="http://fenglee594.github.io/2020/09/07/%E6%8B%9B%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E4%BD%9C%E7%AD%94/index.html">
+<meta property="og:site_name" content="Feng&#39;s Blog">
+<meta property="og:description" content="前言上段时间去久邦和YY面试了几次，发现还是有挺多知识点有点模糊不清，其实挺多东西知道但是没有表达清楚，所以趁现在有时间把网上很经典的《招一个靠谱的iOS》面试题刷一遍，自己作答一遍以便查漏补缺。">
+<meta property="og:image" content="http://fenglee594.github.io/2020/09/07/%E6%8B%9B%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E4%BD%9C%E7%AD%94/1438582884375682.png">
+<meta property="article:published_time" content="2020-09-07T07:27:51.000Z">
+<meta property="article:modified_time" content="2020-11-14T13:46:12.409Z">
+<meta property="article:author" content="Feng">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fenglee594.github.io/2020/09/07/%E6%8B%9B%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E4%BD%9C%E7%AD%94/1438582884375682.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenglee594.github.io/2020/09/07/招一个靠谱的iOS面试题作答/"/>
+
+
+
+
+
+  <title>招一个靠谱的iOS面试题作答 | Feng's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Feng's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">从心所欲不逾矩。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fenglee594.github.io/2020/09/07/%E6%8B%9B%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E4%BD%9C%E7%AD%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Feng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Feng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">招一个靠谱的iOS面试题作答</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-07T15:27:51+08:00">
+                2020-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/09/07/%E6%8B%9B%E4%B8%80%E4%B8%AA%E9%9D%A0%E8%B0%B1%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E4%BD%9C%E7%AD%94/" class="leancloud_visitors" data-flag-title="招一个靠谱的iOS面试题作答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上段时间去久邦和YY面试了几次，发现还是有挺多知识点有点模糊不清，其实挺多东西知道但是没有表达清楚，所以趁现在有时间把网上很经典的<a href="http://blog.sunnyxx.com/2015/07/04/ios-interview/" target="_blank" rel="noopener">《招一个靠谱的iOS》</a>面试题刷一遍，自己作答一遍以便查漏补缺。</p>
+<a id="more"></a>
+
+<h4 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h4><h5 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h5><p><img src="1438582884375682.png" alt="风格纠错" title="风格纠错"></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, LFUserSex) &#123;</span><br><span class="line">    LFUserSexMan,</span><br><span class="line">    LFUserSexWoman,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UserModel</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSUInteger</span> age;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) LFUserSex sex;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)initUserModelWithName:(<span class="built_in">NSString</span> *)name AndAge:(<span class="built_in">NSUInteger</span>)age;</span><br><span class="line">- (<span class="keyword">void</span>)doLogin;</span><br></pre></td></tr></table></figure>
+
+<h5 id="一个区分度很大的面试题"><a href="#一个区分度很大的面试题" class="headerlink" title="一个区分度很大的面试题"></a>一个区分度很大的面试题</h5><h6 id="property-后面可以有哪些修饰符？"><a href="#property-后面可以有哪些修饰符？" class="headerlink" title="@property 后面可以有哪些修饰符？"></a>@property 后面可以有哪些修饰符？</h6><p>答：nonatomic、atomic、strong、weak、assign、readwrite、readonly. 系统默认自带的有atomic、strong、readwrite、assign</p>
+<h6 id="什么情况使用-weak-关键字，相比-assign-有什么不同？"><a href="#什么情况使用-weak-关键字，相比-assign-有什么不同？" class="headerlink" title="什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>什么情况使用 weak 关键字，相比 assign 有什么不同？</h6><p>答：weak一般用来修饰一些需要防止循环引用的属性时使用<br>    与assign的不同点<br>    - weak一般用来修饰对象类型，assign用来修饰非对象类型比如基础数据类型<br>    - weak修饰的属性在释放时会自动置为nil，assign则不会</p>
+<h6 id="怎么用-copy-关键字？"><a href="#怎么用-copy-关键字？" class="headerlink" title="怎么用 copy 关键字？"></a>怎么用 copy 关键字？</h6><p>答：一般用来修饰NSString、NSArray、NSDictionary等有可变类型的的对象</p>
+<h6 id="这个写法会出什么问题：-property-copy-NSMutableArray-array"><a href="#这个写法会出什么问题：-property-copy-NSMutableArray-array" class="headerlink" title="这个写法会出什么问题： @property (copy) NSMutableArray *array;"></a>这个写法会出什么问题： <code>@property (copy) NSMutableArray *array</code>;</h6><p>答：首先这样写实际上等同于<code>@property (atomic, copy) NSMutableArray *array</code>,他会给在array的setter方法里有一个加锁的操作。第二点，使用copy修饰的时候，实际上在array的setter方法里会进行一次copy操作，相当于返回的数组是一个[可变数组 copy],addObjectsFromArray等方法时就会报错，报找不到对应方法的错误。</p>
+<h6 id="如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？"><a href="#如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？" class="headerlink" title="如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？"></a>如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</h6><p>答：遵循NSCopying协议，实现-copyWithZone:方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如何重写带 copy 关键字的 setter？</span></span><br><span class="line"><span class="comment">//以name属性为例，在MRC环境下</span></span><br><span class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_name != name) &#123;</span><br><span class="line">        [_name release];</span><br><span class="line">        _name = [name <span class="keyword">copy</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//当然这时候还需要</span></span><br><span class="line">- (<span class="keyword">void</span>)dealloc</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">self</span>.name = <span class="literal">nil</span>;</span><br><span class="line">	[<span class="keyword">super</span> dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//ARC环境下就是</span></span><br><span class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_name != name) &#123;</span><br><span class="line">        _name = [name <span class="keyword">copy</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的？"><a href="#property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的？" class="headerlink" title="@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？"></a>@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？</h6><p>答：属性的本质就是ivar+getter+setter方法，我们使用属性的时候，系统帮我们自动生成了成员变量、getter方法和setter方法<br>ivar在编译的时候会自动生成并合并到class_ro_t表中的ivar_list表中去，getter和setter则是放到了method_list中</p>
+<h6 id="protocol-和-category-中如何使用-property"><a href="#protocol-和-category-中如何使用-property" class="headerlink" title="@protocol 和 category 中如何使用 @property?"></a>@protocol 和 category 中如何使用 @property?</h6><p>答：协议中使用属性，可以在协议中声明属性，然后在实现协议的类中使用@synthesize去生成成员变量和getter、setter方法，代码块如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//协议中声明属性</span></span><br><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">TestDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *name1;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Test</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">weak</span>) <span class="keyword">id</span>&lt;TestDelegate&gt; delegate;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//实现类中使用</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()&lt;<span class="title">TestDelegate</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@synthesize</span> name1 = _name1;</span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="comment">//这样就可以直接使用name1这个属性了</span></span><br><span class="line">    <span class="keyword">self</span>.name1 = <span class="string">@"123"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>分类中使用属性需要利用runtime去设置关联属性,代码块如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Student</span> (<span class="title">Test</span>)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSUInteger</span> age;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Student</span> (<span class="title">Test</span>)</span></span><br><span class="line"></span><br><span class="line">+(<span class="keyword">void</span>)load</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@--%s"</span>, [<span class="keyword">self</span> <span class="keyword">class</span>], __func__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setAge:(<span class="built_in">NSUInteger</span>)age</span><br><span class="line">&#123;</span><br><span class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, <span class="keyword">@selector</span>(age), @(age), OBJC_ASSOCIATION_ASSIGN);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSUInteger</span>)age</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> [objc_getAssociatedObject(<span class="keyword">self</span>, <span class="keyword">@selector</span>(age)) intValue];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="comment">//这样设置我们就能在引入分类头文件之后，实例化一个对象对age属性进行get和set操作了</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="runtime-如何实现-weak-属性？"><a href="#runtime-如何实现-weak-属性？" class="headerlink" title="runtime 如何实现 weak 属性？"></a>runtime 如何实现 weak 属性？</h6><p>答：runtime</p>
+<h5 id="Checklist"><a href="#Checklist" class="headerlink" title="Checklist"></a>Checklist</h5><h6 id="※-weak属性需要在dealloc中置nil么？"><a href="#※-weak属性需要在dealloc中置nil么？" class="headerlink" title="[※]weak属性需要在dealloc中置nil么？"></a>[※]weak属性需要在dealloc中置nil么？</h6><p>答：ARC下不需要，系统会自动帮我们置为nil，MRC下需要，实际上ARC就是在编译期间帮我们插入了置为nil的代码</p>
+<h6 id="※※-synthesize和-dynamic分别有什么作用？"><a href="#※※-synthesize和-dynamic分别有什么作用？" class="headerlink" title="[※※]@synthesize和@dynamic分别有什么作用？"></a>[※※]@synthesize和@dynamic分别有什么作用？</h6><p>答：@synthesize是将属性等价于变量名，自动生成getter和setter方法<br>@dynamic则是告诉Xcode不要帮我们生成getter和setter方法，这时候我们需要自己去实现，不然不能进行赋值和取值操作</p>
+<h6 id="※※※-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"><a href="#※※※-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？" class="headerlink" title="[※※※]ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"></a>[※※※]ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？</h6><p>答：automic、readwrite、strong（对象类型）/assign（非对象类型）</p>
+<h6 id="※※※-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"><a href="#※※※-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？" class="headerlink" title="[※※※]用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"></a>[※※※]用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</h6><p>答：使用copy修饰的时候，在调用setter方法的时候会进行一次copy操作，返回的是不可变的副本，如果用strong的话，setter方法只是会进行一次retain操作，指向的还是原本传进来的对象，一旦原本的对象改变了，使用strong修饰的属性就会跟着改变。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSArray</span> *sAarry;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span> *cArray;</span><br><span class="line"></span><br><span class="line"><span class="comment">//下面的代码可以说明问题，sArray最终跟着array改变了，而cArray则不会</span></span><br><span class="line"><span class="keyword">self</span>.sAarry = [<span class="built_in">NSArray</span> array];</span><br><span class="line"><span class="keyword">self</span>.cArray = [<span class="built_in">NSArray</span> array];</span><br><span class="line"><span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithArray:@[@<span class="number">1</span>,@<span class="number">2</span>]];</span><br><span class="line"><span class="keyword">self</span>.sAarry = array;</span><br><span class="line"><span class="keyword">self</span>.cArray = array;</span><br><span class="line">[array addObject:@<span class="number">3</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="keyword">self</span>.sAarry);<span class="comment">//@[@1,@2,@3]</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="keyword">self</span>.cArray);<span class="comment">//@[@1,@2]</span></span><br></pre></td></tr></table></figure>
+<h6 id="※※※-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？"><a href="#※※※-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？" class="headerlink" title="[※※※]@synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？"></a>[※※※]@synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？</h6><p>答：规则就是生成一个(下划线+属性名)的成员变量，已经存在了就不会再生成了，但如果你是写成<code>@synthesize foo;</code>而不是<code>@synthesize foo = _foo;</code>的话就会生成foo的成员变量，但前者是不规范的，如果我们直接写<code>@property(nonatomic, string) id foo;</code>Xcode在编译期间帮我们插入的就是<code>@synthesize foo = _foo;</code></p>
+<h6 id="※※※※※-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？"><a href="#※※※※※-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？" class="headerlink" title="[※※※※※]在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？"></a>[※※※※※]在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？</h6><p>答：给协议添加属性，用来给遵循协议的类添加共同属性，例如有A、B两个类和一个协议C，在协议C中声明属性d,然后A和B都遵循协议C，在A和B类中需要<code>@synthesize d = _d</code>来使其生成对应的成员变量和getter、setter方法。</p>
+<h6 id="※※-objc中向一个nil对象发送消息将会发生什么？"><a href="#※※-objc中向一个nil对象发送消息将会发生什么？" class="headerlink" title="[※※]objc中向一个nil对象发送消息将会发生什么？"></a>[※※]objc中向一个nil对象发送消息将会发生什么？</h6><p>答：什么也不会发生，因为在objc_msgSend的底层实现中首先判断的就是消息接收者是不是为空，如果为空就直接返回了。</p>
+<h6 id="※※※-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？"><a href="#※※※-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？" class="headerlink" title="[※※※]objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？"></a>[※※※]objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？</h6><p>答：<code>[obj foo]</code>转化成底层C实现就是<code>objc_msgSend(obj, @selector(foo))</code>。</p>
+<h6 id="※※※-什么时候会报unrecognized-selector的异常？"><a href="#※※※-什么时候会报unrecognized-selector的异常？" class="headerlink" title="[※※※]什么时候会报unrecognized selector的异常？"></a>[※※※]什么时候会报unrecognized selector的异常？</h6><p>答：调用的方法找不到的时候，准确说是在消息发送机制的消息转发阶段还是没有进行处理的话，就会报unrecognized selector的异常。也就是在<code>- (void)forwardInvocation:(NSInvocation *)anInvocation</code>这个方法中。</p>
+<h6 id="※※※※-一个objc对象如何进行内存布局？（考虑有父类的情况）"><a href="#※※※※-一个objc对象如何进行内存布局？（考虑有父类的情况）" class="headerlink" title="[※※※※]一个objc对象如何进行内存布局？（考虑有父类的情况）"></a>[※※※※]一个objc对象如何进行内存布局？（考虑有父类的情况）</h6><p>答：</p>
+<h6 id="※※※※-一个objc对象的isa的指针指向什么？有什么作用？"><a href="#※※※※-一个objc对象的isa的指针指向什么？有什么作用？" class="headerlink" title="[※※※※]一个objc对象的isa的指针指向什么？有什么作用？"></a>[※※※※]一个objc对象的isa的指针指向什么？有什么作用？</h6><p>答：objc的isa指向其类对象，iOS中调用方法时就是通过isa指针找到类对象，再从类对象中去查找相应的方法。</p>
+<h6 id="※※※※-下面的代码输出什么？"><a href="#※※※※-下面的代码输出什么？" class="headerlink" title="[※※※※]下面的代码输出什么？"></a>[※※※※]下面的代码输出什么？</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Son</span> : <span class="title">Father</span></span></span><br><span class="line">- (<span class="keyword">id</span>)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">self</span> <span class="keyword">class</span>]));</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">super</span> <span class="keyword">class</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>答：打印的都是Son，因为[super class]转化成底层C实现就是objc_msgSendSuper()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//跟踪进去我们可以看到的传参，其中有一个是objc_super结构体</span></span><br><span class="line">objc_msgSendSuper(<span class="keyword">void</span> <span class="comment">/* struct objc_super *super, SEL op, ... */</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">//从源码工程中可以找到objc_super的结构体结构如下（删除预编译的一些条件判断）</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_super</span> &#123;</span></span><br><span class="line">    <span class="comment">/// Specifies an instance of a class.</span></span><br><span class="line">    __unsafe_unretained _Nonnull id receiver;</span><br><span class="line">    <span class="comment">/// Specifies the particular superclass of the instance to message. </span></span><br><span class="line">    __unsafe_unretained _Nonnull Class super_class;</span><br><span class="line">    <span class="comment">/* super_class is the first class to search */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>可以看出消息接收者还是当前的实例对象，[super class]只是从父类开始查找class方法（注释中可以看出）。</p>
+<h6 id="※※※※-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"><a href="#※※※※-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）" class="headerlink" title="[※※※※]runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"></a>[※※※※]runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）</h6><p>答：runtime中有两个API可以实现查找IMP的</p>
+<h6 id="※※※※-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？"><a href="#※※※※-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？" class="headerlink" title="[※※※※]使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？"></a>[※※※※]使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</h6><p>答：不需要，主对象释放的时候，会调用dealloc，dealloc的底层实现中有一个判断是不是有关联对象的操作，如果有，这时候他会先把关联对象移除，底层实现如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">objc_destructInstance</span><span class="params">(id obj)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj) &#123;</span><br><span class="line">        <span class="comment">// Read all of the flags at once for performance.</span></span><br><span class="line">        <span class="keyword">bool</span> cxx = obj-&gt;hasCxxDtor();</span><br><span class="line">        <span class="keyword">bool</span> assoc = obj-&gt;hasAssociatedObjects();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This order is important.</span></span><br><span class="line">        <span class="comment">//如果有c++析构函数</span></span><br><span class="line">        <span class="keyword">if</span> (cxx) object_cxxDestruct(obj);</span><br><span class="line">        <span class="comment">//如果有关联对象，就移除关联对象</span></span><br><span class="line">        <span class="keyword">if</span> (assoc) _object_remove_assocations(obj);</span><br><span class="line">        obj-&gt;clearDeallocating();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="※※※※※-objc中的类方法和实例方法有什么本质区别和联系？"><a href="#※※※※※-objc中的类方法和实例方法有什么本质区别和联系？" class="headerlink" title="[※※※※※]objc中的类方法和实例方法有什么本质区别和联系？"></a>[※※※※※]objc中的类方法和实例方法有什么本质区别和联系？</h6><p>答：类方法</p>
+<blockquote>
+<p>类方法是属于类对象的,存储在其对应的元类对象中<br>类方法只能通过类对象调用<br>类方法中的 self 是类对象（这个要注意下，在同一个文件中，实例方法中的self是该类的实例对象，而类方法中是类对象）<br>类方法可以调用其他的类方法<br>类方法中不能访问成员变量<br>类方法中不能直接调用对象方法(可以通过在类方法中new一个实例对象，然后通过实例对象去调用实例方法)</p>
+</blockquote>
+<p>实例方法</p>
+<blockquote>
+<p>实例方法属于实例对象，存储在它的类对象中<br>实例方法只能通过实例对象调用<br>实例方法中的 self 是实例对象<br>实例方法中可以访问成员变量<br>实例方法中可以调用对象方法<br>没有get到这个问题的点，所以参考网上的答案如上</p>
+</blockquote>
+<h6 id="※※※※※-objc-msgForward函数是做什么的，直接调用它将会发生什么？"><a href="#※※※※※-objc-msgForward函数是做什么的，直接调用它将会发生什么？" class="headerlink" title="[※※※※※]_objc_msgForward函数是做什么的，直接调用它将会发生什么？"></a>[※※※※※]<code>_objc_msgForward</code>函数是做什么的，直接调用它将会发生什么？</h6><p>答：<code>_objc_msgForward</code>是用来进行消息转发的</p>
+<h6 id="※※※※※-runtime如何实现weak变量的自动置nil？"><a href="#※※※※※-runtime如何实现weak变量的自动置nil？" class="headerlink" title="[※※※※※]runtime如何实现weak变量的自动置nil？"></a>[※※※※※]runtime如何实现weak变量的自动置nil？</h6><p>答：runtime维护了一个叫做weak_table的哈希表，其中key是这个对象的内存地址，value是weak指针的地址也就是</p>
+<p>Runtime会维护一个weak表，用于维护指向对象的所有weak指针。weak表是一个哈希表，其key为所指对象的指针，value为weak指针的地址数组。<br>具体过程如下：<br>1、初始化时：runtime会调用objc_initWeak函数，初始化一个新的weak指针指向对象的地址。<br>2、添加引用时：objc_initWeak函数会调用 objc_storeWeak() 函数，更新指针指向，创建对应的弱引用表。<br>3、释放时，调用clearDeallocating函数。clearDeallocating函数首先根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。</p>
+<h6 id="※※※※※-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><a href="#※※※※※-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？" class="headerlink" title="[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"></a>[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</h6><p>答：不行，1.因为编译后的类已经注册在 runtime 中,类结构体中的 objc_ivar_list 实例变量的链表和 instance_size 实例变量的内存大小已经确定，同时runtime会调用 class_setvarlayout 或 class_setWeaklvarLayout 来处理strong weak 引用.所以不能向存在的类中添加实例变量。<br>2.运行时创建的类是可以添加实例变量，调用class_addIvar函数. 但是的在调用 objc_allocateClassPair 之后，objc_registerClassPair 之前,原因同上.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/28/iOS%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E7%B1%BB/" rel="next" title="Objective-C 对象解读">
+                <i class="fa fa-chevron-left"></i> Objective-C 对象解读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjg0Mi8xOTM4OQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Feng" />
+            
+              <p class="site-author-name" itemprop="name">Feng</p>
+              <p class="site-description motion-element" itemprop="description">少年不识愁滋味，为赋新词强说愁。<br>而今识尽愁滋味，却道天凉好个秋。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fenglee594" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/fenglee594" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正题"><span class="nav-number">2.</span> <span class="nav-text">正题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码规范"><span class="nav-number">2.1.</span> <span class="nav-text">代码规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个区分度很大的面试题"><span class="nav-number">2.2.</span> <span class="nav-text">一个区分度很大的面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#property-后面可以有哪些修饰符？"><span class="nav-number">2.2.1.</span> <span class="nav-text">@property 后面可以有哪些修饰符？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#什么情况使用-weak-关键字，相比-assign-有什么不同？"><span class="nav-number">2.2.2.</span> <span class="nav-text">什么情况使用 weak 关键字，相比 assign 有什么不同？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#怎么用-copy-关键字？"><span class="nav-number">2.2.3.</span> <span class="nav-text">怎么用 copy 关键字？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#这个写法会出什么问题：-property-copy-NSMutableArray-array"><span class="nav-number">2.2.4.</span> <span class="nav-text">这个写法会出什么问题： @property (copy) NSMutableArray *array;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如何让自己的类用-copy-修饰符？如何重写带-copy-关键字的-setter？"><span class="nav-number">2.2.5.</span> <span class="nav-text">如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#property-的本质是什么？ivar、getter、setter-是如何生成并添加到这个类中的？"><span class="nav-number">2.2.6.</span> <span class="nav-text">@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#protocol-和-category-中如何使用-property"><span class="nav-number">2.2.7.</span> <span class="nav-text">@protocol 和 category 中如何使用 @property?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#runtime-如何实现-weak-属性？"><span class="nav-number">2.2.8.</span> <span class="nav-text">runtime 如何实现 weak 属性？</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Checklist"><span class="nav-number">2.3.</span> <span class="nav-text">Checklist</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#※-weak属性需要在dealloc中置nil么？"><span class="nav-number">2.3.1.</span> <span class="nav-text">[※]weak属性需要在dealloc中置nil么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※-synthesize和-dynamic分别有什么作用？"><span class="nav-number">2.3.2.</span> <span class="nav-text">[※※]@synthesize和@dynamic分别有什么作用？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※-ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？"><span class="nav-number">2.3.3.</span> <span class="nav-text">[※※※]ARC下，不显式指定任何属性关键字时，默认的关键字都有哪些？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※-用-property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？"><span class="nav-number">2.3.4.</span> <span class="nav-text">[※※※]用@property声明的NSString（或NSArray，NSDictionary）经常使用copy关键字，为什么？如果改用strong关键字，可能造成什么问题？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※-synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为-foo的实例变量，那么还会自动合成新变量么？"><span class="nav-number">2.3.5.</span> <span class="nav-text">[※※※]@synthesize合成实例变量的规则是什么？假如property名为foo，存在一个名为_foo的实例变量，那么还会自动合成新变量么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※※-在有了自动合成属性实例变量之后，-synthesize还有哪些使用场景？"><span class="nav-number">2.3.6.</span> <span class="nav-text">[※※※※※]在有了自动合成属性实例变量之后，@synthesize还有哪些使用场景？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※-objc中向一个nil对象发送消息将会发生什么？"><span class="nav-number">2.3.7.</span> <span class="nav-text">[※※]objc中向一个nil对象发送消息将会发生什么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※-objc中向一个对象发送消息-obj-foo-和objc-msgSend-函数之间有什么关系？"><span class="nav-number">2.3.8.</span> <span class="nav-text">[※※※]objc中向一个对象发送消息[obj foo]和objc_msgSend()函数之间有什么关系？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※-什么时候会报unrecognized-selector的异常？"><span class="nav-number">2.3.9.</span> <span class="nav-text">[※※※]什么时候会报unrecognized selector的异常？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※-一个objc对象如何进行内存布局？（考虑有父类的情况）"><span class="nav-number">2.3.10.</span> <span class="nav-text">[※※※※]一个objc对象如何进行内存布局？（考虑有父类的情况）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※-一个objc对象的isa的指针指向什么？有什么作用？"><span class="nav-number">2.3.11.</span> <span class="nav-text">[※※※※]一个objc对象的isa的指针指向什么？有什么作用？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※-下面的代码输出什么？"><span class="nav-number">2.3.12.</span> <span class="nav-text">[※※※※]下面的代码输出什么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※-runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）"><span class="nav-number">2.3.13.</span> <span class="nav-text">[※※※※]runtime如何通过selector找到对应的IMP地址？（分别考虑类方法和实例方法）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※-使用runtime-Associate方法关联的对象，需要在主对象dealloc的时候释放么？"><span class="nav-number">2.3.14.</span> <span class="nav-text">[※※※※]使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※※-objc中的类方法和实例方法有什么本质区别和联系？"><span class="nav-number">2.3.15.</span> <span class="nav-text">[※※※※※]objc中的类方法和实例方法有什么本质区别和联系？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※※-objc-msgForward函数是做什么的，直接调用它将会发生什么？"><span class="nav-number">2.3.16.</span> <span class="nav-text">[※※※※※]_objc_msgForward函数是做什么的，直接调用它将会发生什么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※※-runtime如何实现weak变量的自动置nil？"><span class="nav-number">2.3.17.</span> <span class="nav-text">[※※※※※]runtime如何实现weak变量的自动置nil？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#※※※※※-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><span class="nav-number">2.3.18.</span> <span class="nav-text">[※※※※※]能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("wmQKqzvpjuYpR4gqFrVeci5L-gzGzoHsz", "T3ojvYRDxadeS8zwCMQForfT");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
